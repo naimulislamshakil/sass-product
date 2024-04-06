@@ -1,12 +1,13 @@
 import React from 'react';
-import MaxWidthWrapper from '../MaxWidthWrapper';
 import Banner from './Banner';
+import ValueProposition from '../ValueProposition';
 
 const Home = () => {
 	return (
-		<MaxWidthWrapper className="mb-12 mt-28 sm:mt-40 flex flex-col items-center justify-center text-center font-sans">
+		<div>
 			<Banner />
-		</MaxWidthWrapper>
+			<ValueProposition />
+		</div>
 	);
 };
 
