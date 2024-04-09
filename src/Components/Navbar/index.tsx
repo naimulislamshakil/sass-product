@@ -24,7 +24,7 @@ const Navbar = () => {
 					>
 						<ul className="flex lg:flex-row flex-col items-center gap-[4vw]">
 							{navbars.map((item) => (
-								<li className="">
+								<li onClick={() => isClick(!click)}>
 									<Link
 										className="hover:text-zinc-700 font-semibold"
 										to={item?.path}
