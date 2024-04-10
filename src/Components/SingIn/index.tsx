@@ -59,7 +59,7 @@ const Singin = () => {
 
 					<div className="mt-5">
 						<span className="font-semibold">
-							Already have an account?{' '}
+							Don't have an account?{' '}
 							<Link to="/singup" className="text-blue-700">
 								SingUp
 							</Link>
