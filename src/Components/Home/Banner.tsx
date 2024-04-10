@@ -24,7 +24,7 @@ const Banner = () => {
 			</p>
 
 			<Link
-				className="bg-zinc-900 justify-center items-center flex hover:bg-zinc-800 text-white py-2 px-7 mt-5 rounded"
+				className="bg-zinc-900 justify-center items-center flex hover:bg-zinc-800 text-white py-2 px-7 mt-5 rounded shadow-lg transition duration-300"
 				to="/dashboard"
 				target="_blank"
 			>

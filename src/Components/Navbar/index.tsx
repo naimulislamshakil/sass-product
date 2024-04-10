@@ -11,7 +11,7 @@ const Navbar = () => {
 		<nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blue-lg transition-all">
 			<MaxWidthWrapper>
 				<div className="flex h-14 items-center justify-between border-b border-zinc-200">
-					<Link to="/" className="flex z-40 font-bold text-2xl md:text-base">
+					<Link to="/" className="flex z-40 font-bold text-2xl ">
 						<span>Datamino</span>
 					</Link>
 
@@ -39,15 +39,15 @@ const Navbar = () => {
 					<div className="flex justify-center items-center">
 						<button
 							type="button"
-							className="text-zinc-600 bg-transparent hover:bg-zinc-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
+							className="text-zinc-600 bg-transparent hover:bg-zinc-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300"
 						>
 							<Link className="font-semibold" to="login">
-								Sing In
+								Login
 							</Link>
 						</button>
 						<button
 							type="button"
-							className="bg-zinc-900 hover:bg-zinc-800 py-2 md:py-1 px-4 text-white rounded ml-1"
+							className="bg-zinc-900 hover:bg-zinc-800 py-2 md:py-1 px-4 text-white rounded ml-1 shadow-lg transition duration-300"
 						>
 							<Link
 								to="/singup"
