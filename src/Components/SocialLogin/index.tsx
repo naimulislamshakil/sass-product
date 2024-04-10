@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const SocialLogin = () => {
 	return (
-		<div className="mt-10 w-[60%]">
+		<div className="mt-10 lg:w-[60%] md:w-full">
 			{/* for facebook */}
 			<div className="flex justify-center items-center text-white bg-blue-800 rounded shadow-lg transition duration-300 w-[100%] py-2 px-7 hover:bg-blue-700">
 				<svg

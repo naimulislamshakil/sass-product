@@ -7,25 +7,25 @@ const Singin = () => {
 	const [hidden, isHidden] = useState(true);
 	return (
 		<div className="h-screen w-full bg-slate-100 flex justify-center items-center">
-			<div className="bg-white shadow-xl shadow-slate-300 rounded-xl p-5 w-[50%] flex flex-col justify-center items-center py-10">
+			<div className="bg-white shadow-xl shadow-slate-300 rounded-xl p-5 lg:w-[50%] md:w-full flex flex-col justify-center items-center py-10">
 				<h1 className="flex z-40 font-bold text-2xl uppercase">Login</h1>
 
 				<form
 					action=""
 					className="flex flex-col justify-center items-center w-full"
 				>
-					<div className="mt-6 w-[60%]">
+					<div className="mt-6 lg:w-[60%] md:w-full">
 						<input
 							type="email"
-							placeholder="jdgfdh"
+							placeholder="webminds@gmail.com"
 							className="w-[100%] border outline-none rounded px-3 bg-white h-11 shadow-md"
 						/>
 					</div>
 
-					<div className="mt-4 w-[60%] relatives flex justify-end items-center">
+					<div className="mt-4 lg:w-[60%] md:w-full relatives flex justify-end items-center">
 						<input
 							type={hidden ? 'password' : 'text'}
-							placeholder="ddkjk"
+							placeholder="***********"
 							className="w-[100%] border outline-none rounded px-3 bg-white h-11 shadow-md pr-3"
 						/>
 						{hidden ? (
@@ -49,7 +49,7 @@ const Singin = () => {
 						</span>
 					</div>
 
-					<div className="w-[60%]">
+					<div className="lg:w-[60%] md:w-full">
 						<input
 							type="button"
 							value="login"
@@ -69,7 +69,7 @@ const Singin = () => {
 
 				<div className="line"></div>
 
-				<SocialLogin/>
+				<SocialLogin />
 			</div>
 		</div>
 	);
