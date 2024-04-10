@@ -23,6 +23,7 @@ function App() {
 				<Route path="/developers" element={<ComingSoon />} />
 				<Route path="/pricing" element={<ComingSoon />} />
 			</Routes>
+			<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 		</div>
 	);
 }

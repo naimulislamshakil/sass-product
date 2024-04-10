@@ -1,6 +1,7 @@
 import { Eye, EyeOff } from 'lucide-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SocialLogin from '../SocialLogin';
 
 const Singin = () => {
 	const [hidden, isHidden] = useState(true);
@@ -67,6 +68,8 @@ const Singin = () => {
 				</form>
 
 				<div className="line"></div>
+
+				<SocialLogin/>
 			</div>
 		</div>
 	);
