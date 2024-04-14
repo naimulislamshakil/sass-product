@@ -7,7 +7,8 @@ import Navbar from './Components/Navbar';
 import Singin from './Components/SingIn';
 import Singup from './Components/Singup';
 import ComingSoon from './Components/ComingSoon';
-// import { cn } from './lib/util';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 	return (
@@ -23,6 +24,9 @@ function App() {
 				<Route path="/developers" element={<ComingSoon />} />
 				<Route path="/pricing" element={<ComingSoon />} />
 			</Routes>
+
+			<ToastContainer />
+
 			<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 		</div>
 	);

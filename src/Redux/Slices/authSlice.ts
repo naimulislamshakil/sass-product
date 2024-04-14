@@ -14,12 +14,16 @@ export const fetchRegister = createAsyncThunk(
 	}
 );
 interface IssuesState {
-	data: {};
+	data: {
+		message: string;
+		status: number;
+		success: boolean;
+	} | null;
 	loading: boolean;
 	error: string | null;
 }
 const initialState: IssuesState = {
-	data: {},
+	data: null,
 	loading: false,
 	error: null,
 };

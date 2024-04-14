@@ -1,13 +1,15 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import SocialLogin from '../SocialLogin';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { AppDispatch, RootState, useAppDispatch } from '../../Redux/store';
 import { fetchRegister } from '../../Redux/Slices/authSlice';
+import { successToast } from '../../lib/toastify';
 
 const Singup = () => {
 	const [hidden, isHidden] = useState(true);
+	const navigate = useNavigate();
 	const [confirmHidden, isConfirmHidden] = useState(true);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -16,6 +18,11 @@ const Singup = () => {
 	const { data, loading, error } = useSelector(
 		(state: RootState) => state.singup
 	);
+
+	if (data?.success === true) {
+		successToast(data?.message);
+		navigate('/login');
+	}
 
 	const onSubmitSingup = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
