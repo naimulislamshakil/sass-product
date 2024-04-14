@@ -1,22 +1,42 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import SocialLogin from '../SocialLogin';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { AppDispatch, RootState, useAppDispatch } from '../../Redux/store';
+import { fetchRegister } from '../../Redux/Slices/authSlice';
 
 const Singup = () => {
 	const [hidden, isHidden] = useState(true);
 	const [confirmHidden, isConfirmHidden] = useState(true);
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [rePassword, setRePassword] = useState('');
+	const dispatch: AppDispatch = useAppDispatch();
+	const { data, loading, error } = useSelector(
+		(state: RootState) => state.singup
+	);
+
+	const onSubmitSingup = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		if (password === rePassword) {
+			const user = { email, password };
+
+			dispatch(fetchRegister(user));
+		}
+	};
 	return (
 		<div className="h-screen w-full bg-slate-100 flex justify-center items-center">
 			<div className="bg-white shadow-xl shadow-slate-300 rounded-xl p-5 lg:w-[50%] md:w-full flex flex-col justify-center items-center py-10">
 				<h1 className="flex z-40 font-bold text-2xl uppercase">singup</h1>
 
 				<form
-					action=""
+					onSubmit={onSubmitSingup}
 					className="flex flex-col justify-center items-center w-full"
 				>
 					<div className="mt-6 lg:w-[60%] md:w-full">
 						<input
+							onChange={(e) => setEmail(e.target.value)}
 							type="email"
 							placeholder="webminds@gmail.com"
 							className="w-[100%] border outline-none rounded px-3 bg-white h-11 shadow-md"
@@ -26,6 +46,7 @@ const Singup = () => {
 					<div className="mt-4 lg:w-[60%] md:w-full relatives flex justify-end items-center">
 						<input
 							type={hidden ? 'password' : 'text'}
+							onChange={(e) => setPassword(e.target.value)}
 							placeholder="Create Password"
 							className="w-[100%] border outline-none rounded px-3 bg-white h-11 shadow-md pr-3"
 						/>
@@ -45,6 +66,7 @@ const Singup = () => {
 					<div className="mt-4 lg:w-[60%] md:w-full relatives flex justify-end items-center">
 						<input
 							type={confirmHidden ? 'password' : 'text'}
+							onChange={(e) => setRePassword(e.target.value)}
 							placeholder="Confirm Password"
 							className="w-[100%] border outline-none rounded px-3 bg-white h-11 shadow-md pr-3"
 						/>
@@ -63,7 +85,7 @@ const Singup = () => {
 
 					<div className="lg:w-[60%] md:w-full">
 						<input
-							type="button"
+							type="submit"
 							value="singup"
 							className="bg-zinc-900 justify-center items-center flex hover:bg-zinc-800 text-white py-2 px-7 mt-5 rounded shadow-lg transition duration-300 w-[100%] uppercase font-semibold tracking-widest"
 						/>
