@@ -7,3 +7,10 @@ export const successToast = (mesg: string) => {
 		hideProgressBar: true,
 	});
 };
+export const errorToast = (mesg: string = 'Pleace check all input field.') => {
+	toast.error(mesg, {
+		position: 'top-right',
+		theme: 'dark',
+		hideProgressBar: true,
+	});
+};

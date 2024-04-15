@@ -5,7 +5,8 @@ import { Eye, EyeOff } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { AppDispatch, RootState, useAppDispatch } from '../../Redux/store';
 import { fetchRegister } from '../../Redux/Slices/authSlice';
-import { successToast } from '../../lib/toastify';
+import { errorToast, successToast } from '../../lib/toastify';
+import Skeleton from '../Loading';
 
 const Singup = () => {
 	const [hidden, isHidden] = useState(true);
@@ -32,8 +33,14 @@ const Singup = () => {
 			dispatch(fetchRegister(user));
 		}
 	};
+
+	if (error) {
+		errorToast();
+	}
 	return (
 		<div className="h-screen w-full bg-slate-100 flex justify-center items-center">
+			{loading && <Skeleton />}
+
 			<div className="bg-white shadow-xl shadow-slate-300 rounded-xl p-5 lg:w-[50%] md:w-full flex flex-col justify-center items-center py-10">
 				<h1 className="flex z-40 font-bold text-2xl uppercase">singup</h1>
 
