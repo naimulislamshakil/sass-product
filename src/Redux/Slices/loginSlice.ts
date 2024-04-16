@@ -34,7 +34,11 @@ const initialState: LoginState = {
 export const loginSlice = createSlice({
 	name: 'login',
 	initialState,
-	reducers: {},
+	reducers: {
+		messageClear: (state, _) => {
+			state.error = null;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchLogin.pending, (state) => {
