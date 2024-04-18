@@ -9,13 +9,12 @@ import Singup from './Components/Singup';
 import ComingSoon from './Components/ComingSoon';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSelector } from 'react-redux';
 import { errorToast } from './lib/toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
 	const dispatch = useDispatch();
-	const { data, loading, error } = useSelector((state) => state.persistent);
+	// const { data, loading, error } = useSelector((state) =);
 	const navigate = useNavigate();
 
 	const token = localStorage.getItem('token');

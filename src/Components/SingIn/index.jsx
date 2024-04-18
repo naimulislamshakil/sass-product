@@ -2,11 +2,10 @@ import { Eye, EyeOff } from 'lucide-react';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin';
-import { useSelector } from 'react-redux';
 import { fetchLogin } from '../../Redux/Slices/loginSlice';
 import { errorToast, successToast } from '../../lib/toastify';
 import Skeleton from '../Loading';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Singin = () => {
 	const [hidden, isHidden] = useState(true);

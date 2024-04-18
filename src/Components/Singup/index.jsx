@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import SocialLogin from '../SocialLogin';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
-import { useSelector } from 'react-redux';
 import { fetchRegister } from '../../Redux/Slices/authSlice';
 import { errorToast, successToast } from '../../lib/toastify';
 import Skeleton from '../Loading';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Singup = () => {
 	const [hidden, isHidden] = useState(true);
