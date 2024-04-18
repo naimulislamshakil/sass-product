@@ -1,26 +1,24 @@
 import { Eye, EyeOff } from 'lucide-react';
-import React, { FormEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin';
-import { AppDispatch, RootState, useAppDispatch } from '../../Redux/store';
 import { useSelector } from 'react-redux';
 import { fetchLogin } from '../../Redux/Slices/loginSlice';
 import { errorToast, successToast } from '../../lib/toastify';
 import Skeleton from '../Loading';
+import { useDispatch } from 'react-redux';
 
 const Singin = () => {
 	const [hidden, isHidden] = useState(true);
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const dispatch: AppDispatch = useAppDispatch();
-	const { data, loading, error } = useSelector(
-		(state: RootState) => state.login
-	);
+	const dispatch = useDispatch();
+	const { data, loading, error } = useSelector((state) => state.login);
 
 	// console.log({ data, loading, error });
 
-	const onSubmitLogin = (e: FormEvent<HTMLFormElement>) => {
+	const onSubmitLogin = (e) => {
 		e.preventDefault();
 
 		const user = { email, password };
@@ -55,6 +53,7 @@ const Singin = () => {
 									onChange={(e) => setEmail(e.target.value)}
 									placeholder="webminds@gmail.com"
 									className="w-[100%] border outline-none rounded px-3 bg-white h-11 shadow-md"
+									autoComplete="off"
 								/>
 							</div>
 
@@ -64,6 +63,7 @@ const Singin = () => {
 									placeholder="***********"
 									onChange={(e) => setPassword(e.target.value)}
 									className="w-[100%] border outline-none rounded px-3 bg-white h-11 shadow-md pr-3"
+									autoComplete="off"
 								/>
 								{hidden ? (
 									<EyeOff

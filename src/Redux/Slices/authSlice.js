@@ -4,25 +4,17 @@ import { baseUrl } from '../fetchApi';
 
 export const fetchRegister = createAsyncThunk(
 	'register/addUser',
-	async (data: { email: string; password: string }, thunkAPI) => {
+	async (data, { fulfillWithValue, rejectWithValue }) => {
 		try {
 			const response = await axios.post(`${baseUrl}/singup`, data);
 			return response.data;
 		} catch (error) {
-			return thunkAPI.rejectWithValue('Failed to fetch issues.');
+			return rejectWithValue('Failed to fetch issues.');
 		}
 	}
 );
-interface IssuesState {
-	data: {
-		message: string;
-		status: number;
-		success: boolean;
-	} | null;
-	loading: boolean;
-	error: string | null;
-}
-const initialState: IssuesState = {
+
+const initialState = {
 	data: null,
 	loading: false,
 	error: null,

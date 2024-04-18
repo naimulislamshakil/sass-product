@@ -4,7 +4,7 @@ import { baseUrl } from '../fetchApi';
 
 export const fetchLogin = createAsyncThunk(
 	'auth/login',
-	async (data: { email: string; password: string }, thunkAPI) => {
+	async (data, thunkAPI) => {
 		try {
 			const response = await axios.post(`${baseUrl}/login`, data);
 			return thunkAPI.fulfillWithValue(response.data);
@@ -14,18 +14,7 @@ export const fetchLogin = createAsyncThunk(
 	}
 );
 
-interface LoginState {
-	data: {
-		message: string;
-		status: number;
-		success: boolean;
-		token: string;
-	} | null;
-	loading: boolean;
-	error: string | null;
-}
-
-const initialState: LoginState = {
+const initialState = {
 	data: null,
 	loading: false,
 	error: null,
