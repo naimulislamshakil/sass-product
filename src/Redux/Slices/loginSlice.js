@@ -2,17 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { baseUrl } from '../fetchApi';
 
-export const fetchLogin = createAsyncThunk(
-	'auth/login',
-	async (data, thunkAPI) => {
-		try {
-			const response = await axios.post(`${baseUrl}/login`, data);
-			return thunkAPI.fulfillWithValue(response.data);
-		} catch (error) {
-			return thunkAPI.rejectWithValue(error);
-		}
-	}
-);
+export const fetchLogin = createAsyncThunk('auth/login', async (data) => {
+	axios.defaults.withCredentials = true;
+	const response = await axios.post(`${baseUrl}/login`, data);
+	return response.data;
+});
 
 const initialState = {
 	data: null,
@@ -41,7 +35,13 @@ export const loginSlice = createSlice({
 			})
 			.addCase(fetchLogin.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.error.message || 'Pleace Login Again...';
+
+				if (action.error.message === 'Request failed with status code 409') {
+					state.error = 'Access Denied! Invalid Credentials.';
+				} else {
+					state.error = action.error.message;
+				}
+
 				state.data = null;
 			});
 	},

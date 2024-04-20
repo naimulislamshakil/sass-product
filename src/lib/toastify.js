@@ -1,16 +1,14 @@
 import { toast } from 'react-toastify';
 
-export const successToast = (mesg: string) => {
+export const successToast = (mesg) => {
 	toast.success(mesg, {
 		position: 'top-right',
 		theme: 'dark',
-		hideProgressBar: true,
 	});
 };
-export const errorToast = (mesg: string = 'Pleace check all input field.') => {
+export const errorToast = (mesg = 'Pleace check all input field.') => {
 	toast.error(mesg, {
 		position: 'top-right',
 		theme: 'dark',
-		hideProgressBar: true,
 	});
 };

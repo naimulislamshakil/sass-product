@@ -1,12 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MaxWidthWrapper from '../MaxWidthWrapper';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { navbars } from '../../lib/navbar';
-import { AlignJustify, ArrowRight, X } from 'lucide-react';
+import { AlignJustify, ArrowRight, CircleUser, X } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPersistent } from '../../Redux/Slices/persistentSlice';
+import { fetchLogout } from '../../Redux/Slices/logoutSlice';
 
 const Navbar = () => {
 	const [click, isClick] = useState(false);
-	// console.log(click);
+	const [isOpen, setOpen] = useState(false);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const [data, setData] = useState();
+
+	useEffect(() => {
+		dispatch(fetchPersistent()).then((result) => {
+			if (result.payload) {
+				setData(result.payload);
+			}
+		});
+	}, [dispatch]);
+
+	const LogOut = () => {
+		dispatch(fetchLogout()).then((result) => {
+			if (result.payload) {
+				navigate('/login');
+			}
+		});
+	};
+
+	// if (logData?.success === true && logData?.status === 200) {
+	// 	navigate('/login');
+	// }
+
 	return (
 		<nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blue-lg transition-all">
 			<MaxWidthWrapper>
@@ -37,25 +64,73 @@ const Navbar = () => {
 					</div>
 
 					<div className="flex justify-center items-center">
-						<button
-							type="button"
-							className="text-zinc-600 bg-transparent hover:bg-zinc-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300"
-						>
-							<Link className="font-semibold" to="login">
-								Login
-							</Link>
-						</button>
-						<button
-							type="button"
-							className="bg-zinc-900 hover:bg-zinc-800 py-2 md:py-1 px-4 text-white rounded ml-1 shadow-lg transition duration-300"
-						>
-							<Link
-								to="/singup"
-								className="justify-center items-center flex font-semibold"
-							>
-								Get Start <ArrowRight className="ml-2 h-5 w-5" />
-							</Link>
-						</button>
+						{data?.success === true && data?.status === 200 ? (
+							<>
+								<div
+									className="flex justify-center items-center gap-2"
+									onClick={(e) => setOpen(!isOpen)}
+								>
+									<CircleUser />
+								</div>
+
+								{isOpen === true && (
+									<div className="bg-white/75 absolute top-14 flex flex-col items-center rounded-lg">
+										<ul
+											class="py-2 text-sm text-gray-700 dark:text-gray-200"
+											aria-labelledby="dropdownDefaultButton"
+										>
+											<li>
+												<Link
+													to="/dashboard"
+													class="block px-4 py-2 hover:bg-gray-100 font-semibold"
+												>
+													Dashboard
+												</Link>
+											</li>
+											<li>
+												<Link
+													to="#"
+													class="block px-4 py-2 hover:bg-gray-100 font-semibold"
+												>
+													Settings
+												</Link>
+											</li>
+
+											<li>
+												<button
+													onClick={() => LogOut()}
+													class="block px-4 py-2 hover:bg-gray-100 font-semibold"
+												>
+													Sign out
+												</button>
+											</li>
+										</ul>
+									</div>
+								)}
+							</>
+						) : (
+							<>
+								<button
+									type="button"
+									className="text-zinc-600 bg-transparent hover:bg-zinc-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300"
+								>
+									<Link className="font-semibold" to="/login">
+										Login
+									</Link>
+								</button>
+								<button
+									type="button"
+									className="bg-zinc-900 hover:bg-zinc-800 py-2 md:py-1 px-4 text-white rounded ml-1 shadow-lg transition duration-300"
+								>
+									<Link
+										to="/singup"
+										className="justify-center items-center flex font-semibold"
+									>
+										Get Start <ArrowRight className="ml-2 h-5 w-5" />
+									</Link>
+								</button>
+							</>
+						)}
 
 						<button
 							onClick={() => isClick(!click)}
