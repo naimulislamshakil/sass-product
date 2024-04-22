@@ -6,11 +6,19 @@ import Home from './Components/Home';
 import Singin from './Components/SingIn';
 import Singup from './Components/Singup';
 import ComingSoon from './Components/ComingSoon';
-import { ToastContainer } from 'react-toastify';
+import { Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import { errorToast } from './lib/toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPersistent } from './Redux/Slices/persistentSlice';
+import DashboardContent from './Components/Dashboard/DashboardContent';
+import Appointments from './Components/Dashboard/Appointments';
+import Payments from './Components/Dashboard/Payments';
+import Invoices from './Components/Dashboard/Invoices';
+import Services from './Components/Dashboard/Services';
+import Medicine from './Components/Dashboard/Medicine';
+import Campaings from './Components/Dashboard/Campaings';
+import Settings from './Components/Dashboard/Settings';
 
 function App() {
 	// console.log({ data, loading, error });
@@ -25,7 +33,16 @@ function App() {
 		<div>
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/dashboard" element={<Dashboard />} />
+				<Route path="/dashboard" element={<Dashboard />}>
+					<Route index element={<DashboardContent />} />
+					<Route path="/dashboard/appointments" element={<Appointments />} />
+					<Route path="/dashboard/payments" element={<Payments />} />
+					<Route path="/dashboard/invoices" element={<Invoices />} />
+					<Route path="/dashboard/services" element={<Services />} />
+					<Route path="/dashboard/medicines" element={<Medicine />} />
+					<Route path="/dashboard/campaings" element={<Campaings />} />
+					<Route path="/dashboard/settings" element={<Settings />} />
+				</Route>
 				<Route path="/login" element={<Singin />} />
 				<Route path="/singup" element={<Singup />} />
 				<Route path="/solution" element={<ComingSoon />} />
@@ -34,7 +51,7 @@ function App() {
 				<Route path="/pricing" element={<ComingSoon />} />
 			</Routes>
 
-			<ToastContainer />
+			<Toaster />
 
 			<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 		</div>

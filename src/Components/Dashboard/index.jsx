@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import Skeleton from '../Loading';
 import Navbar from '../Navbar';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchPersistent } from '../../Redux/Slices/persistentSlice';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { errorToast } from '../../lib/toastify';
+import { Button, Layout, theme } from 'antd';
+import User from './User';
+import MenuList from './MenuList';
+import ToggleThemeButton from './ToggleThemeButton';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
-const Dashboard = () => {
+const { Header, Sider, Content } = Layout;
+const Dashboard = ({ children }) => {
 	const [loading, setLoading] = useState(true);
+	const [darkTheme, setDarkTheme] = useState(false);
+	const [collapsed, setCollapsed] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { error } = useSelector((state) => state.persistent);
-
-	console.log(error);
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -21,13 +26,21 @@ const Dashboard = () => {
 	}, []);
 
 	useEffect(() => {
-		dispatch(fetchPersistent());
-	}, [dispatch]);
+		dispatch(fetchPersistent()).then((result) => {
+			if (result?.error?.message === 'Request failed with status code 409') {
+				errorToast('Please Login Again!');
+				navigate('/login');
+			}
+		});
+	}, [dispatch, navigate]);
 
-	if (error === !null) {
-		navigate('/login');
-		errorToast('Pleace LogIn Again!');
-	}
+	const toggleTheme = () => {
+		setDarkTheme(!darkTheme);
+	};
+
+	const {
+		token: { colorBgContainer },
+	} = theme.useToken();
 	return (
 		<div>
 			{loading ? (
@@ -35,7 +48,37 @@ const Dashboard = () => {
 			) : (
 				<>
 					<Navbar />
-					'Dashboard'
+					<Layout>
+						<Sider
+							collapsible
+							collapsed={collapsed}
+							trigger={null}
+							theme={darkTheme ? 'dark' : 'light'}
+						>
+							<User darkTheme={darkTheme} />
+							<MenuList darkTheme={darkTheme} />
+							<ToggleThemeButton
+								darkTheme={darkTheme}
+								toggleTheme={toggleTheme}
+							/>
+						</Sider>
+
+						<Layout>
+							<Header style={{ padding: 0, background: colorBgContainer }}>
+								<Button
+									type="text"
+									className="ml-[15px]"
+									onClick={(e) => setCollapsed(!collapsed)}
+									icon={
+										collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />
+									}
+								/>
+							</Header>
+							<Content>
+								<Outlet />
+							</Content>
+						</Layout>
+					</Layout>
 				</>
 			)}
 		</div>
