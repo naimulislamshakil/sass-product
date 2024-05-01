@@ -19,6 +19,8 @@ import Services from './Components/Dashboard/Services';
 import Medicine from './Components/Dashboard/Medicine';
 import Campaings from './Components/Dashboard/Campaings';
 import Settings from './Components/Dashboard/Settings';
+import Patients from './Components/Dashboard/Patients/Patients';
+import AddPatient from './Components/Dashboard/Patients/AddPatient';
 
 function App() {
 	// console.log({ data, loading, error });
@@ -35,6 +37,8 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/dashboard" element={<Dashboard />}>
 					<Route index element={<DashboardContent />} />
+					<Route path="/dashboard/patients" element={<Patients />} />
+					<Route path="/dashboard/patient/add" element={<AddPatient />} />
 					<Route path="/dashboard/appointments" element={<Appointments />} />
 					<Route path="/dashboard/payments" element={<Payments />} />
 					<Route path="/dashboard/invoices" element={<Invoices />} />

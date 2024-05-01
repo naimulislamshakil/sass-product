@@ -23,8 +23,6 @@ const Singup = () => {
 		if (password === rePassword) {
 			const user = { email, password };
 
-			
-
 			dispatch(fetchRegister(user)).then((result) => {
 				if (result.payload) {
 					successToast(result?.payload?.message);

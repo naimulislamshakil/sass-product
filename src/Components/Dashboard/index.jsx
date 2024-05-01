@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Skeleton from '../Loading';
-import Navbar from '../Navbar';
 import { useDispatch } from 'react-redux';
 import { fetchPersistent } from '../../Redux/Slices/persistentSlice';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
@@ -63,7 +62,6 @@ const Dashboard = ({ children }) => {
 				<Skeleton />
 			) : (
 				<>
-					<Navbar />
 					<Layout>
 						<Sider
 							collapsible

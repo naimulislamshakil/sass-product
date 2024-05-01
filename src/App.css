@@ -1,3 +1,5 @@
+@import 'rsuite/dist/rsuite.css';
+
 .relatives {
 	position: relative !important;
 }
@@ -27,4 +29,14 @@
 .ant-menu-item-selected {
 	background-color: #0d9488 !important;
 	color: white !important;
+}
+
+.button-floting {
+	position: fixed;
+	width: 60px;
+	height: 60px;
+	bottom: 0;
+	right: 0;
+	border-radius: 100%;
+	margin: 35px 25px;
 }

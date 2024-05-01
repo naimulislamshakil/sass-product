@@ -36,13 +36,9 @@ const MenuList = ({ darkTheme }) => {
 				Dashboard
 			</Menu.Item>
 
-			<Menu.SubMenu
-				key="subPatients"
-				icon={<Diversity1OutlinedIcon />}
-				title="Patients"
-			>
-				<Menu.Item>sahghs</Menu.Item>
-			</Menu.SubMenu>
+			<Menu.Item key="/dashboard/patients" icon={<Diversity1OutlinedIcon />}>
+				Patients
+			</Menu.Item>
 
 			<Menu.SubMenu
 				key="subReceptions"

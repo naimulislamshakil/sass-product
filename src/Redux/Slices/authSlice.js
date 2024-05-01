@@ -5,6 +5,7 @@ import { baseUrl } from '../fetchApi';
 export const fetchRegister = createAsyncThunk(
 	'register/addUser',
 	async (data) => {
+		console.log({ data });
 		axios.defaults.withCredentials = true;
 		const response = await axios.post(`${baseUrl}/singup`, data);
 		return response.data;
