@@ -7,9 +7,11 @@
 		"@emotion/react": "^11.11.4",
 		"@emotion/styled": "^11.11.5",
 		"@mui/icons-material": "^5.15.15",
-		"@mui/material": "^5.15.15",
+		"@mui/material": "^5.15.16",
+		"@mui/styled-engine-sc": "^6.0.0-alpha.18",
 		"@redux-devtools/extension": "^3.3.0",
 		"@reduxjs/toolkit": "^2.2.3",
+		"@tanstack/react-query": "^5.32.1",
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^13.5.0",
@@ -17,6 +19,7 @@
 		"@types/node": "^16.18.94",
 		"@types/react": "^18.2.74",
 		"@types/react-dom": "^18.2.24",
+		"age-calculator": "^1.0.0",
 		"antd": "^5.16.2",
 		"axios": "^1.6.8",
 		"boxicons": "^2.1.4",
@@ -26,6 +29,7 @@
 		"dayjs": "^1.11.11",
 		"flowbite": "^2.3.0",
 		"lucide-react": "^0.365.0",
+		"preline": "^2.1.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-hot-toast": "^2.4.1",
@@ -36,6 +40,7 @@
 		"react-toastify": "^10.0.5",
 		"redux-devtools-extension": "^2.13.9",
 		"rsuite": "^5.59.2",
+		"styled-components": "^6.1.9",
 		"tailwind-merge": "^2.2.2",
 		"web-vitals": "^2.1.4"
 	},
@@ -64,6 +69,7 @@
 		]
 	},
 	"devDependencies": {
+		"daisyui": "^4.10.3",
 		"tailwindcss": "^3.4.3"
 	}
 }

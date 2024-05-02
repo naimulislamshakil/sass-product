@@ -40,3 +40,7 @@
 	border-radius: 100%;
 	margin: 35px 25px;
 }
+
+a {
+	text-decoration: none;
+}
