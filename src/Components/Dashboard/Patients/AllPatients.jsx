@@ -1,21 +1,58 @@
-import React from 'react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState } from 'react';
 import FilterPatients from './FilterPatients';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { getAllPatient } from '../../../lib/fetchReq';
-import { Avatar, Dropdown, Flex, Spin, Menu } from 'antd';
+import { Avatar, Dropdown, Flex, Spin, Menu, Button, Modal } from 'antd';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../../../Redux/fetchApi';
+import { successToast } from '../../../lib/toastify';
 
 const AllPatients = () => {
 	const navigate = useNavigate();
+	const [open, setOpen] = useState(false);
 	const { data, error, isLoading } = useQuery({
 		queryKey: ['getPatient'],
 		queryFn: getAllPatient,
 	});
 
+	const {
+		mutate,
+		isPending: deleteLoading,
+		data: deleteData,
+	} = useMutation({
+		mutationKey: 'deletePatient',
+		mutationFn: async (id) => {
+			const res = await fetch(`${baseUrl}/deleteSinglePatient/${id}`, {
+				method: 'DELETE',
+			});
+			return res.json();
+		},
+	});
+
+	console.log({ deleteData, deleteLoading });
+
+	if (deleteData?.status === 200) {
+		successToast(deleteData?.message);
+	}
+
 	const navigateForSingleUser = (id) => {
 		navigate(`/dashboard/patient/view/${id}`);
+	};
+
+	const showModal = () => {
+		setOpen(true);
+	};
+	const handleOk = (id) => {
+		mutate(id);
+
+		setOpen(false);
+	};
+
+	const handleCancel = () => {
+		setOpen(false);
 	};
 
 	return (
@@ -25,7 +62,7 @@ const AllPatients = () => {
 
 				{/* table */}
 
-				{isLoading ? (
+				{isLoading || deleteLoading ? (
 					<Flex align="center" justify="center" className="py-10">
 						<Spin size="large" />
 					</Flex>
@@ -95,9 +132,29 @@ const AllPatients = () => {
 												>
 													<RemoveRedEyeOutlinedIcon className="mr-2" />
 												</button>
-												<button class="bg-teal-200 duration-300 text-white font-bold py-2 px-4 rounded">
+												<button
+													onClick={showModal}
+													class="bg-teal-200 duration-300 text-white font-bold py-2 px-4 rounded"
+												>
 													<DeleteOutlinedIcon className="mr-2 text-red-800" />
 												</button>
+
+												<Modal
+													open={open}
+													title="Confirmation Message 🤔"
+													onOk={() => handleOk(patient._id)}
+													onCancel={handleCancel}
+													okButtonProps={{
+														className: 'okButton',
+													}}
+												>
+													Are you sure to{' '}
+													<span className="font-semibold text-red-800">
+														Delete
+													</span>{' '}
+													<span className="font-semibold">{patient.name}</span>{' '}
+													patient 😮
+												</Modal>
 											</td>
 										</tr>
 									</>

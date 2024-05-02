@@ -6,3 +6,11 @@ export const getAllPatient = async () => {
 	});
 	return res.json();
 };
+
+export const getSinglePatient = async ({ id }) => {
+	console.log(id);
+	const res = await fetch(`${baseUrl}/getSinglePatient/${id}`, {
+		method: 'GET',
+	});
+	return res.json();
+};

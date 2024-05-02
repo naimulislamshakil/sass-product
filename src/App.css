@@ -44,3 +44,12 @@
 a {
 	text-decoration: none;
 }
+
+
+.okButton{
+	color: white;
+	background-color: red;
+}
+.okButton:hover{
+	background-color: rgb(219, 76, 76) !important;
+}
